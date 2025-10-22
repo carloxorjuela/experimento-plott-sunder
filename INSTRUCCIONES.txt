@@ -33,3 +33,40 @@
 ═══════════════════════════════
 Si tienes problemas, contacta a: carloxorjuela@github.com
 "@ | Out-File -FilePath "INSTRUCCIONES.txt" -Encoding UTF8
+
+
+Probar el  bat a ver si tiene y carga directo el otree
+$env:Path += ";C:\Users\$env:Sebastian\AppData\Roaming\Python\Python310\Scripts"
+#$env:Path += ";C:\Users\$env:Username\AppData\Roaming\Python\Python310\Scripts"
+otree --version
+del db.sqlite3
+otree devserver
+
+
+
+$env:Path += ";C:\Users\$env:USERNAME\AppData\Roaming\Python\Python310\Scripts"
+del db.sqlite3 -ErrorAction SilentlyContinue
+otree devserver
+
+
+
+
+🚀 PARA CORRER EL EXPERIMENTO:
+═══════════════════════════════════
+1. Abrir PowerShell en la carpeta del proyecto
+2. Copiar y pegar estos comandos UNO POR UNO:
+
+`$env:Path += ";C:\Users\`$env:USERNAME\AppData\Roaming\Python\Python310\Scripts"
+del db.sqlite3 -ErrorAction SilentlyContinue
+otree devserver
+
+3. El navegador se abrirá automáticamente en http://localhost:8000
+4. Para detener el servidor, presionar Ctrl+C
+
+📝 CREAR UNA SESIÓN:
+═══════════════════════════════════
+1. En el navegador, ir a "Sessions" → "Create new session"
+2. Seleccionar "plott_sunder"
+3. Elegir número de participantes (debe ser múltiplo de 3)
+4. Click en "Create"
+5. Compartir los links de participantes
