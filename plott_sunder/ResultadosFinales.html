@@ -1,0 +1,93 @@
+{{ block title }}Resultados Finales{{ endblock }}
+{{ block content }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+
+                <!-- Título Principal -->
+                <div class="text-center mb-4 mt-3">
+                    <h1 style="font-size: 3em;">🏆 Top 3 Ganadores del Experimento</h1>
+                </div>
+
+                <!-- Tu Posición si NO estás en Top 3 -->
+                {{ if mi_ranking > 3 }}
+                <div class="alert alert-info text-center mb-4" style="font-size: 1.3em;">
+                    <b>Tu posición: #{{ mi_ranking }} con {{ mi_payoff_total }} puntos</b>
+                </div>
+                {{ endif }}
+
+                <!-- Top 3 Ganadores -->
+                <div class="row mb-4">
+                    {{ for jugador in top_3 }}
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 {{ if jugador.id == player.id_in_group }}border-success{{ endif }}"
+                                 style="{{ if jugador.id == player.id_in_group }}border-width: 4px;{{ endif }}">
+                                <div class="card-header text-center
+                                    {{ if jugador.ranking == 1 }}bg-warning text-dark
+                                    {{ elif jugador.ranking == 2 }}bg-secondary text-white
+                                    {{ else }}bg-info text-white
+                                    {{ endif }}">
+                                    <h2 style="font-size: 3em; margin: 0;">
+                                        {{ if jugador.ranking == 1 }}🥇
+                                        {{ elif jugador.ranking == 2 }}🥈
+                                        {{ else }}🥉
+                                        {{ endif }}
+                                    </h2>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4><b>#{{ jugador.ranking }}</b></h4>
+                                    <h3>
+                                        Jugador {{ jugador.id }}
+                                        {{ if jugador.id == player.id_in_group }}
+                                            <br><span class="badge badge-success">Tú</span>
+                                        {{ endif }}
+                                    </h3>
+                                    <hr>
+                                    <h2 style="font-size: 2.5em; font-weight: bold;">{{ jugador.payoff }}</h2>
+                                    <p style="font-size: 1.2em;">puntos</p>
+                                </div>
+                            </div>
+                        </div>
+                    {{ endfor }}
+                </div>
+
+                <!-- Mensaje de Agradecimiento -->
+                <div class="card bg-info text-white text-center mb-4">
+                    <div class="card-body">
+                        <h3>🙏 Gracias por participar en este experimento</h3>
+                        <p style="font-size: 1.2em;">
+                            Tu participación ayuda a entender cómo se agrega la información
+                            dispersa en situaciones de incertidumbre.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Resumen del Experimento -->
+                <div class="card mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5>Resumen del Experimento</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <b>Total de rondas jugadas:</b> {{ C.NUM_ROUNDS }}<br>
+                            <b>Número de participantes:</b> {{ C.PLAYERS_PER_GROUP }}<br>
+                            <b>Premio por ronda:</b> {{ C.PREMIO }} puntos
+                        </p>
+                        <hr>
+                        <p class="alert alert-info">
+                            <b>Concepto demostrado:</b> Este experimento ilustra cómo individuos con
+                            información parcial y privada pueden, a través de sus decisiones, agregar
+                            información de manera colectiva - un principio fundamental en la teoría
+                            de mercados y toma de decisiones bajo incertidumbre.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{ next_button }}
+
+{{ endblock }}

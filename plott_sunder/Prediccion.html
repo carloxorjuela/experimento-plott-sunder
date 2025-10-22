@@ -1,0 +1,76 @@
+{{ block title }}Ronda {{ player.round_number }} de {{ C.NUM_ROUNDS }}{{ endblock }}
+{{ block content }}
+
+    <div class="card bg-warning m-3">
+        <div class="card-header">
+            <h4>Tu Señal Privada</h4>
+        </div>
+        <div class="card-body">
+            <p class="lead text-center">
+                Tu señal es: <span class="badge badge-danger" style="font-size: 2em; padding: 15px;">{{ player.señal_privada }}</span>
+            </p>
+
+            <div class="alert alert-info">
+                <h5>¿Qué significa tu señal?</h5>
+                <p>
+                    Basándote en tu señal, el activo puede valer:
+                    <b>{{ valores_posibles.0 }}</b> puntos o <b>{{ valores_posibles.1 }}</b> puntos
+                </p>
+                <p>
+                    El <b>valor esperado</b> sería: <b>{{ valor_esperado }}</b> puntos
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {{ if historico }}
+    <div class="card m-3">
+        <div class="card-header bg-secondary text-white">
+            <h5>Tu Historial (Rondas Anteriores)</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Ronda</th>
+                        <th>Tu Predicción</th>
+                        <th>Valor Verdadero</th>
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for item in historico }}
+                        <tr>
+                            <td>{{ item.ronda }}</td>
+                            <td>{{ item.prediccion }}</td>
+                            <td>{{ item.valor }}</td>
+                            <td>{{ item.error }}</td>
+                        </tr>
+                    {{ endfor }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{ endif }}
+
+    <div class="card m-3">
+        <div class="card-header bg-primary text-white">
+            <h4>Haz tu Predicción</h4>
+        </div>
+        <div class="card-body">
+            <p>
+                ¿Cuál crees que es el valor verdadero del activo en esta ronda?
+            </p>
+
+            {{ formfields }}
+
+            <div class="alert alert-success mt-3">
+                <b>Recuerda:</b> Ganarán {{ C.PREMIO }} puntos el o los jugadores
+                cuya predicción esté más cerca del valor verdadero.
+            </div>
+        </div>
+    </div>
+
+    {{ next_button }}
+
+{{ endblock }}

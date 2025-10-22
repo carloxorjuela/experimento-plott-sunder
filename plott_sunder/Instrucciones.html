@@ -1,0 +1,67 @@
+{{ block title }}Instrucciones{{ endblock }}
+{{ block content }}
+
+    <div class="card bg-light m-3">
+        <div class="card-body">
+            <h4>Bienvenido al Experimento de Predicción</h4>
+
+            <h5>Estructura del Experimento:</h5>
+            <p>
+                Formas parte de un grupo de {{ C.PLAYERS_PER_GROUP }} participantes.<br>
+                El experimento tiene <b>{{ C.NUM_ROUNDS }} rondas</b>.
+            </p>
+
+            <h5>Valor del Activo:</h5>
+            <p>
+                En cada ronda, un activo puede tener uno de tres valores posibles:
+            </p>
+            <ul>
+                <li><b>Estado X:</b> el activo vale <b>0 puntos</b></li>
+                <li><b>Estado Y:</b> el activo vale <b>240 puntos</b></li>
+                <li><b>Estado Z:</b> el activo vale <b>480 puntos</b></li>
+            </ul>
+
+            <h5>Tu Información Privada:</h5>
+            <p>
+                Recibirás una <b>señal privada</b> que descarta UNO de los tres estados posibles.
+            </p>
+            <p>
+                <b>Ejemplo:</b> Si recibes "NOT X", sabes que el activo <b>NO</b> vale 0,
+                pero podría valer 240 o 480.
+            </p>
+            <p>
+                <i>Esta información es privada - solo tú la conoces.</i>
+            </p>
+
+            <h5>Tu Tarea:</h5>
+            <p>
+                En cada ronda debes hacer una <b>predicción</b> del valor verdadero del activo
+                (puedes escoger cualquier valor entre 0 y 480).
+            </p>
+
+            <h5>Cálculo de Ganancias:</h5>
+            <p>
+                Al final de cada ronda:
+            </p>
+            <ul>
+                <li>Se revelará el <b>valor verdadero</b> del activo</li>
+                <li>Se revelarán las <b>predicciones</b> de todos los participantes</li>
+                <li>El o los jugadores cuya predicción esté <b>más cerca</b> del valor verdadero ganarán <b>{{ C.PREMIO }}</b> puntos</li>
+                <li>Si hay empate, el premio se divide equitativamente</li>
+            </ul>
+
+            <div class="alert alert-success">
+                <b>Estrategia:</b> Usa tu señal privada para calcular el valor esperado del activo
+                y haz la mejor predicción posible.
+            </div>
+
+            <div class="alert alert-info">
+                <b>Nota:</b> El estado del activo es independiente en cada ronda -
+                lo que pasó en rondas anteriores no afecta la ronda actual.
+            </div>
+        </div>
+    </div>
+
+    {{ next_button }}
+
+{{ endblock }}

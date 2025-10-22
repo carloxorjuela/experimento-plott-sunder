@@ -1,0 +1,104 @@
+{{ block title }}Resultados - Ronda {{ player.round_number }}{{ endblock }}
+{{ block content }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+
+                <!-- Revelación del Estado Verdadero -->
+                <div class="card bg-info text-white mb-3">
+                    <div class="card-header">
+                        <h4>Valor Verdadero Revelado</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3>
+                            Estado: <span class="badge badge-light text-dark" style="font-size: 1.5em;">{{ group.estado_verdadero }}</span>
+                        </h3>
+                        <h2>
+                            Valor del activo: <b style="font-size: 2em;">{{ group.valor_verdadero }}</b> puntos
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Tu Predicción -->
+                <div class="card mb-3">
+                    <div class="card-header {{ if player.es_ganador }}bg-success text-white{{ else }}bg-secondary text-white{{ endif }}">
+                        <h5>Tu Predicción</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><b>Tu señal privada:</b> {{ player.señal_privada }}</p>
+                        <p><b>Tu predicción:</b> <span class="badge badge-primary" style="font-size: 1.5em;">{{ player.prediccion }}</span></p>
+                        <p><b>Error absoluto:</b> {{ error }} puntos</p>
+
+                        {{ if player.es_ganador }}
+                            {{ if group.n_ganadores > 1 }}
+                                <div class="alert alert-success">
+                                    <h5>¡Felicitaciones!</h5>
+                                    <p>Tú eres uno de los <b>{{ group.n_ganadores }}</b> ganadores que empataron con la mejor predicción.</p>
+                                    <p><b>Tu pago esta ronda: {{ player.payoff }}</b></p>
+                                </div>
+                            {{ else }}
+                                <div class="alert alert-success">
+                                    <h5>¡GANASTE!</h5>
+                                    <p>Tu predicción fue la más cercana al valor verdadero.</p>
+                                    <p><b>Tu pago esta ronda: {{ player.payoff }}</b></p>
+                                </div>
+                            {{ endif }}
+                        {{ else }}
+                            <div class="alert alert-warning">
+                                <p>No ganaste esta ronda.</p>
+                                <p><b>Tu pago esta ronda: 0</b></p>
+                            </div>
+                        {{ endif }}
+                    </div>
+                </div>
+
+                <!-- Predicciones de Todos los Jugadores -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Predicciones de Todos los Participantes</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Predicciones ordenadas de menor a mayor:</p>
+                        <div class="text-center" style="font-size: 1.2em;">
+                            {{ for pred in predicciones_ordenadas }}
+                                <span class="badge {{ if pred == group.mejor_prediccion }}badge-success{{ else }}badge-secondary{{ endif }}" style="margin: 3px; padding: 8px;">
+                                    {{ pred }}
+                                </span>
+                            {{ endfor }}
+                        </div>
+                        <hr>
+                        <p class="text-center">
+                            <b>Valor verdadero:</b> <span class="badge badge-info" style="font-size: 1.3em;">{{ group.valor_verdadero }}</span><br>
+                            <b>Mejor predicción:</b> <span class="badge badge-success" style="font-size: 1.3em;">{{ group.mejor_prediccion }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Información Sobre la Agregación de Información -->
+                <div class="card mb-3">
+                    <div class="card-header bg-secondary text-white">
+                        <h5>Análisis de Información</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><b>Distribución de señales en el grupo:</b></p>
+                        <ul>
+                            <li>3 jugadores recibieron "NOT X" (activo podría valer 240 o 480)</li>
+                            <li>3 jugadores recibieron "NOT Y" (activo podría valer 0 o 480)</li>
+                            <li>3 jugadores recibieron "NOT Z" (activo podría valer 0 o 240)</li>
+                        </ul>
+                        <p class="alert alert-info">
+                            <b>Nota teórica:</b> Si todos los jugadores usaran su información racionalmente,
+                            el promedio de las predicciones debería aproximarse al valor verdadero,
+                            demostrando cómo los mercados agregan información dispersa.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{ next_button }}
+
+{{ endblock }}
