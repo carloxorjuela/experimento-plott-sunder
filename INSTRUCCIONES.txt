@@ -1,0 +1,35 @@
+# Crear el archivo INSTRUCCIONES.txt
+@"
+╔════════════════════════════════════════════════════════════════╗
+║   EXPERIMENTO PLOTT & SUNDER (1988) - INSTRUCCIONES           ║
+╚════════════════════════════════════════════════════════════════╝
+
+📦 INSTALACIÓN (UNA SOLA VEZ):
+═══════════════════════════════
+1. Instalar Python 3.10 o superior desde python.org
+2. Abrir PowerShell en esta carpeta
+3. Ejecutar: pip install otree
+
+🚀 PARA CORRER EL EXPERIMENTO:
+═══════════════════════════════
+1. Hacer doble click en start.bat
+2. El navegador se abrirá automáticamente en http://localhost:8000
+3. Para detener el servidor, presionar Ctrl+C en la ventana que se abre
+
+📝 CREAR UNA SESIÓN:
+═══════════════════════════════
+1. En el navegador, ir a "Sessions" → "New"
+2. Elegir número de participantes (debe ser múltiplo de 3)
+3. Click en "Create"
+4. Compartir los links con los participantes
+
+⚠️ PROBLEMAS COMUNES:
+═══════════════════════════════
+- Si dice "otree no se reconoce": Ejecutar pip install otree
+- Si no abre el navegador: Ir manualmente a http://localhost:8000
+- Si dice "puerto en uso": Cerrar otros servidores corriendo
+
+📧 CONTACTO:
+═══════════════════════════════
+Si tienes problemas, contacta a: carloxorjuela@github.com
+"@ | Out-File -FilePath "INSTRUCCIONES.txt" -Encoding UTF8

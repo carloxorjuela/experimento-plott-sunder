@@ -1,40 +1,43 @@
+# Crear el archivo start.bat
+@"
 @echo off
-echo ========================================
+cls
+echo ============================================
 echo   Experimento Plott ^& Sunder (1988)
-echo ========================================
+echo ============================================
 echo.
 
-REM Verificar si el entorno virtual existe
-if not exist "venv" (
-    echo [ERROR] No se encontro el entorno virtual.
-    echo Por favor ejecuta primero: python -m venv venv
+REM Crear _static si no existe
+if not exist "_static" mkdir _static
+
+REM Agregar al PATH temporalmente
+set PATH=%PATH%;%APPDATA%\Python\Python310\Scripts
+
+REM Verificar si otree está instalado
+where otree >nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] oTree no esta instalado
+    echo Por favor ejecuta: pip install otree
     echo.
     pause
     exit /b 1
 )
 
-echo [1/3] Activando entorno virtual...
-call venv\Scripts\activate.bat
+REM Resetear base de datos
+echo Reseteando base de datos...
+otree resetdb --noinput
 
-echo [2/3] Verificando Redis...
-tasklist /FI "IMAGENAME eq redis-server.exe" 2>NUL | find /I /N "redis-server.exe">NUL
-if "%ERRORLEVEL%"=="1" (
-    echo [ADVERTENCIA] Redis no esta ejecutandose.
-    echo Por favor inicia Redis en otra terminal con: redis-server
-    echo.
-)
+REM Abrir navegador
+start http://localhost:8000
 
-echo [3/3] Iniciando servidor de oTree...
+REM Correr servidor
 echo.
-echo ========================================
-echo   Servidor iniciado en:
-echo   http://localhost:8000
+echo ============================================
+echo   Servidor corriendo en http://localhost:8000
+echo   Presiona Ctrl+C para detener
+echo ============================================
 echo.
-echo   Usuario: admin
-echo   Password: admin123
-echo ========================================
-echo.
-
 otree devserver
 
 pause
+"@ | Out-File -FilePath "start.bat" -Encoding ASCII
