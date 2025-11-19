@@ -53,6 +53,54 @@
     </div>
     {{ endif }}
 
+    {{ if estadisticas_grupo }}
+    <div class="card m-3 border-success">
+        <div class="card-header bg-success text-white">
+            <h5>📊 Información Pública: Predicciones del Grupo (Rondas 1-3)</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">
+                <i>Esta información es visible para todos los miembros del grupo.</i>
+            </p>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="text-muted">Promedio</h6>
+                            <h3 class="text-primary">{{ estadisticas_grupo.promedio }}</h3>
+                            <small>puntos</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="text-muted">Mínimo</h6>
+                            <h3 class="text-success">{{ estadisticas_grupo.minimo }}</h3>
+                            <small>puntos</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="text-muted">Máximo</h6>
+                            <h3 class="text-danger">{{ estadisticas_grupo.maximo }}</h3>
+                            <small>puntos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-warning mt-3">
+                <small>
+                    <b>Nota:</b> Estas estadísticas se basan en las {{ estadisticas_grupo.total_predicciones }} predicciones
+                    realizadas por todos los jugadores de tu grupo en las rondas 1, 2 y 3.
+                </small>
+            </div>
+        </div>
+    </div>
+    {{ endif }}
+
     <div class="card m-3">
         <div class="card-header bg-primary text-white">
             <h4>Haz tu Predicción</h4>

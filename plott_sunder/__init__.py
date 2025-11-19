@@ -11,7 +11,7 @@ Los jugadores reciben señales privadas sobre el valor de un activo y hacen pred
 class C(BaseConstants):
     NAME_IN_URL = 'plott_sunder'
     PLAYERS_PER_GROUP = 3
-    NUM_ROUNDS = 3
+    NUM_ROUNDS = 5
 
     # Valores posibles del activo según el estado
     VALORES_POSIBLES = [0, 240, 480]
@@ -146,10 +146,28 @@ class Prediccion(Page):
                 'error': error
             })
 
+        # Si estamos en ronda 4 o 5, calcular estadísticas agregadas del grupo de rondas 1-3
+        estadisticas_grupo = None
+        if player.round_number >= 4:
+            todas_predicciones_1_3 = []
+            for ronda in range(1, 4):  # rondas 1, 2, 3
+                group_in_ronda = player.group.in_round(ronda)
+                for p in group_in_ronda.get_players():
+                    todas_predicciones_1_3.append(p.prediccion)
+
+            if todas_predicciones_1_3:
+                estadisticas_grupo = {
+                    'promedio': round(sum(todas_predicciones_1_3) / len(todas_predicciones_1_3), 2),
+                    'minimo': min(todas_predicciones_1_3),
+                    'maximo': max(todas_predicciones_1_3),
+                    'total_predicciones': len(todas_predicciones_1_3)
+                }
+
         return dict(
             valores_posibles=valores_posibles,
             valor_esperado=valor_esperado,
-            historico=historico
+            historico=historico,
+            estadisticas_grupo=estadisticas_grupo
         )
 
 
