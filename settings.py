@@ -23,7 +23,7 @@ REAL_WORLD_CURRENCY_CODE = 'COP'
 USE_POINTS = True
 
 ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD', 'admin123')
 
 SECRET_KEY = environ.get('OTREE_SECRET_KEY', '7k@9m#p$r2x!q5w&8n*d4f-j6h+b3v=c1z%a0e^t')
 
