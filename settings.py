@@ -22,12 +22,12 @@ LANGUAGE_CODE = 'es'
 REAL_WORLD_CURRENCY_CODE = 'COP'
 USE_POINTS = True
 
-ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD', 'admin123')
+ADMIN_USERNAME = 'admin'
+ADMIN_PASSWORD = 'admin123'
 
-SECRET_KEY = environ.get('OTREE_SECRET_KEY', '7k@9m#p$r2x!q5w&8n*d4f-j6h+b3v=c1z%a0e^t')
+SECRET_KEY = '7k@9m#p$r2x!q5w&8n*d4f-j6h+b3v=c1z%a0e^t'
 
-DEBUG = environ.get('OTREE_DEBUG', '') == '1'
+DEBUG = True
 
 ROOMS = [
     dict(
@@ -36,7 +36,7 @@ ROOMS = [
     ),
 ]
 
-AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL', 'STUDY')
+AUTH_LEVEL = 'DEMO'
 
 DEMO_PAGE_INTRO_HTML = """
 <p>Experimentos económicos implementados en oTree</p>
