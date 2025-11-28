@@ -1,6 +1,5 @@
 from os import environ
 
-# SESSION CONFIGS
 SESSION_CONFIGS = [
     dict(
         name='plott_sunder',
@@ -16,30 +15,20 @@ SESSION_CONFIG_DEFAULTS = dict(
     doc=""
 )
 
-# PARTICIPANT_FIELDS: campos personalizados que se pueden acceder entre apps
 PARTICIPANT_FIELDS = []
-
-# SESSION_FIELDS: campos personalizados a nivel de sesión
 SESSION_FIELDS = []
 
-# ISO-639 code
 LANGUAGE_CODE = 'es'
-
-# e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'COP'
 USE_POINTS = True
 
-# ADMIN CREDENTIALS (cambiar en producción)
-ADMIN_USERNAME = 'admin'
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD', 'admin123')
+ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
-# SECRET_KEY (cambiar en producción con una cadena aleatoria segura)
-SECRET_KEY = '7k@9m#p$r2x!q5w&8n*d4f-j6h+b3v=c1z%a0e^t'
+SECRET_KEY = environ.get('OTREE_SECRET_KEY', '7k@9m#p$r2x!q5w&8n*d4f-j6h+b3v=c1z%a0e^t')
 
-# DEBUG MODE
-DEBUG = True
+DEBUG = environ.get('OTREE_DEBUG', '') == '1'
 
-# ROOMS configuration (opcional)
 ROOMS = [
     dict(
         name='plott_sunder_lab',
@@ -47,10 +36,8 @@ ROOMS = [
     ),
 ]
 
-# AUTH LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL', 'STUDY')
 
-# Configuración de producción
 DEMO_PAGE_INTRO_HTML = """
 <p>Experimentos económicos implementados en oTree</p>
 """

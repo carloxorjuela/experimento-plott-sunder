@@ -27,3 +27,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Local files
+INICIAR.bat
+.env

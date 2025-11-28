@@ -1,9 +1,2 @@
-# oTree - Framework principal para experimentos económicos
 otree>=5.0.0
-
-# Django - Framework web (requerido por oTree)
-Django>=3.2,<4.0
-
-# Utilidades
-python-dotenv>=0.19.0  # Para variables de entorno (opcional)
-
+psycopg2-binary>=2.9.0
